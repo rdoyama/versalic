@@ -19,7 +19,7 @@ class VERSALICRequests():
     def __init__(self, config: Any):
         self.base_url = config.get("URL", "base_url")
         self.city = config.get("FILTERS", "city")
-        self.state = config.get("FILTERS", "state")
+        self.state = config.get("FILTERS", "state").upper()
 
         self.session = curl_cffi.Session()
 

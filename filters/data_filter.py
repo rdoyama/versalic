@@ -1,3 +1,5 @@
+import datetime
+
 from config.configuration import Configuration
 from dto.response_model import Incentivador, Donation
 
@@ -15,6 +17,6 @@ class DataFilter:
 
     def _donation_filter_criteria(self, donation: Donation) -> bool:
         return (
-                self.config.get("FILTERS", "min_donation") <= donation.valor <= self.config.get("FILTERS", "max_donation")
-                and self.config.get("FILTERS", "from_date") <= donation.data_recibo <= self.config.get("FILTERS", "until_date")
+                self.config.getfloat("FILTERS", "min_donation") <= donation.valor <= self.config.getfloat("FILTERS", "max_donation")
+                and datetime.date.fromisoformat(self.config.get("FILTERS", "from_date")) <= donation.data_recibo <= datetime.date.fromisoformat(self.config.get("FILTERS", "until_date"))
         )

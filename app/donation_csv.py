@@ -34,7 +34,7 @@ class DonationCSV:
             "Valor da doação (R$)",
             "Data da doação",
             "Nome do projeto"
-        ])
+        ], output="doacoes.csv")
 
     def get_donations_from_incentivadores(self, incentivadores: list[Incentivador]) -> list[DonationModelCSV]:
         donations_to_csv = []
