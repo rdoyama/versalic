@@ -56,9 +56,9 @@ class VERSALICRequests():
         while offset < total:
             url = assemble_incentiv_url(self.base_url, self.city, self.state, INCENTIV_PER_PAGE, offset)
             incentivadores_json = self._get(url)
-            incentivadores = IncentivadoresResponse(**incentivadores_json).data
+            incentivadores = IncentivadoresResponse(**incentivadores_json)
             total = incentivadores.total
             offset += incentivadores.count
-            incentivadores_list.extend(incentivadores.incentivadores)
+            incentivadores_list.extend(incentivadores.data.incentivadores)
 
         return incentivadores_list

@@ -19,9 +19,10 @@ class DonationCSV:
         logger.info('Gerando o CSV de doações')
         logger.info('Baixando a lista de Incentivadores...')
         incentivadores = self.versalic.get_list_of_incentivadores()
+        total_incentiv_nofilt = len(incentivadores)
         logger.info('Filtrando a lista de Incentivadores')
         incentivadores = self.data_filter.filter_incentivadores(incentivadores)
-        logger.info(f'Total: {len(incentivadores)}')
+        logger.info(f'Total: {len(incentivadores)} de {total_incentiv_nofilt} após filtro')
         logger.info('Baixando a lista de doações para os incentivadores...\n')
         donations_to_csv = self.get_donations_from_incentivadores(incentivadores)
         write_objects_to_csv(donations_to_csv, [
@@ -43,9 +44,10 @@ class DonationCSV:
             if incentivador.links.doacoes.strip():
                 logger.info(f'[{i + 1}/{total_incentivadores}] Doações do incentivador {incentivador.nome}')
                 donations = self.versalic.get_donations(incentivador.links.doacoes.strip())
+                len_donations_init = len(donations)
                 logger.info('Filtrando doações')
                 donations = self.data_filter.filter_donations(donations)
-                logger.info(f'Total de doações: {len(donations)}\n')
+                logger.info(f'Total de doações: {len(donations)} de {len_donations_init} após filtro\n')
                 for donation in donations:
                     cnpj_formatted = f"{incentivador.cgccpf[:2]}.{incentivador.cgccpf[2:5]}.{incentivador.cgccpf[5:8]}/{incentivador.cgccpf[8:12]}-{incentivador.cgccpf[12:]}"
                     donations_to_csv.append(DonationModelCSV(
