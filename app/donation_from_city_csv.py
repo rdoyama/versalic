@@ -9,14 +9,14 @@ from http_requests.custom_requests import VERSALICRequests
 
 logger = logging.getLogger(__name__)
 
-class DonationCSV:
+class DonationFromCityCSV:
     def __init__(self, config: Configuration):
         self.config = config
         self.data_filter = DataFilter(config)
         self.versalic = VERSALICRequests(config)
 
     def generate_donation_csv(self):
-        logger.info('Gerando o CSV de doações')
+        logger.info('Gerando o CSV de doações de uma determinada cidade')
         logger.info('Baixando a lista de Incentivadores...')
         incentivadores = self.versalic.get_list_of_incentivadores()
         total_incentiv_nofilt = len(incentivadores)
@@ -35,7 +35,7 @@ class DonationCSV:
             "Valor da doação (R$)",
             "Data da doação",
             "Nome do projeto"
-        ], output="doacoes.csv")
+        ], output="doacoes_da_cidade.csv")
 
     def get_donations_from_incentivadores(self, incentivadores: list[Incentivador]) -> list[DonationModelCSV]:
         donations_to_csv = []

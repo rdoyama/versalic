@@ -15,4 +15,4 @@ def write_objects_to_csv(objects: list[BaseModel], headers: list[str], separator
         csv_writer.writeheader()
         csv_writer.writerows(dicts)
 
-    logger.info(f"CSV {output} written successfully")
+    logger.info(f"CSV {output} written successfully\n")

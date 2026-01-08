@@ -64,3 +64,36 @@ class DonationsResponse:
     data: Donations = Field(alias="_embedded")
     count: int = 0
     total: int = 0
+
+
+@dataclass(config=ConfigDict(extra='ignore'))
+class Project:
+    pronac: str = Field(alias='PRONAC')
+    mecanismo: str = Field(alias='mecanisnmo')
+    uf: str = Field(alias='UF')
+    nome: str = ""
+    cgccpf: str = ""
+    resumo: str = ""
+    tipologia: str = ""
+    municipio: str = ""
+    segmento: str = ""
+    data_inicio: date = None
+    data_termino: date = None
+    proponente: str = ""
+    valor_solicitado: float = 0
+    valor_aprovado: float = 0
+    valor_projeto: float = 0
+    valor_captado: float = 0
+    valor_proposta: float = 0
+
+
+@dataclass(config=ConfigDict(extra='ignore'))
+class Projects:
+    projetos: list[Project] = ()
+
+
+@dataclass(config=ConfigDict(extra='ignore'))
+class ProjectsResponse:
+    data: Optional[Projects] = Field(alias='_embedded')
+    count: int = 0
+    total: int = 0
