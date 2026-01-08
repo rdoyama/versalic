@@ -64,6 +64,9 @@ class Configuration(RawConfigParser):
         if self.getfloat(CONFIG_FILTER_KEY, "min_donation") > self.getfloat(CONFIG_FILTER_KEY, "max_donation"):
             raise ValueError("min_donation should be less than max_donation")
 
+        if self.getfloat(CONFIG_FILTER_KEY, "min_donation") < 0 or self.getfloat(CONFIG_FILTER_KEY, "max_donation") < 0:
+            raise ValueError("min_donation and max_donation must be positive")
+
         if datetime.date.fromisoformat(self.get(CONFIG_FILTER_KEY, "from_date")) > datetime.date.fromisoformat(self.get(CONFIG_FILTER_KEY, "until_date")):
             raise ValueError("from_date should be less than until_date")
 
