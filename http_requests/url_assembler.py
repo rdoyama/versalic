@@ -1,7 +1,7 @@
 from urllib.parse import urlencode
 
 
-def assemble_incentiv_url(base_url: str, city: str, state: str, limit: int, offset: int, pronac: str = None) -> str:
+def assemble_incentiv_url(base_url: str, city: str | None, state: str | None, limit: int, offset: int, pronac: str = None) -> str:
     base_url = base_url.strip() + "/api/v1/incentivadores"
     params = {
         "limit": limit,

@@ -1,5 +1,6 @@
 import logging
 import sys
+import time
 
 from app.donation_from_city_csv import DonationFromCityCSV
 from app.donation_to_city_csv import DonationToCityCSV
@@ -19,6 +20,8 @@ def main():
         encoding='utf-8'
     )
 
+    start = time.time()
+
     config = Configuration()
 
     if config.get("FILES", "donation_to_city_csv").lower() == "true":
@@ -29,6 +32,7 @@ def main():
         donation_from_city_csv = DonationFromCityCSV(config)
         donation_from_city_csv.generate_donation_csv()
 
+    logger.info(f"Total execution time: {time.time() - start:.2f} seconds")
 
 if __name__ == '__main__':
     main()

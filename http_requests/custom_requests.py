@@ -1,6 +1,4 @@
 import logging
-import random
-import time
 
 import curl_cffi
 
@@ -31,7 +29,6 @@ class VERSALICRequests():
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:146.0) Gecko/20100101 Firefox/146.0',
             'Accept': 'application/json, text/plain, */*',
         }
-        time.sleep(random.random())
         logger.info(f"HTTP GET {url}")
         response = self.session.get(url, impersonate='firefox', headers=headers)
         if response.status_code != 200:
